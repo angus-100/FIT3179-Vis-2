@@ -1,0 +1,108 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "height": 300,
+    "width": 300,
+    "title": {
+        "text":"Severity Distribution By Year",
+        "fontSize": 25
+    },
+    "background": "transparent",
+    "data": {
+        "values": [
+            {"Year": 2010, "Severity": "Fatal", "Count": 1},
+            {"Year": 2010, "Severity": "Injured", "Count": 11},
+            {"Year": 2010, "Severity": "Uninjured", "Count": 2},
+            {"Year": 2011, "Severity": "Fatal", "Count": 5},
+            {"Year": 2011, "Severity": "Injured", "Count": 9},
+            {"Year": 2011, "Severity": "Uninjured", "Count": 1},
+            {"Year": 2012, "Severity": "Fatal", "Count": 2},
+            {"Year": 2012, "Severity": "Injured", "Count": 13},
+            {"Year": 2012, "Severity": "Uninjured", "Count": 8},
+            {"Year": 2013, "Severity": "Fatal", "Count": 2},
+            {"Year": 2013, "Severity": "Injured", "Count": 11},
+            {"Year": 2013, "Severity": "Uninjured", "Count": 2},
+            {"Year": 2014, "Severity": "Fatal", "Count": 5},
+            {"Year": 2014, "Severity": "Injured", "Count": 17},
+            {"Year": 2014, "Severity": "Uninjured", "Count": 3},
+            {"Year": 2015, "Severity": "Fatal", "Count": 2},
+            {"Year": 2015, "Severity": "Injured", "Count": 23},
+            {"Year": 2015, "Severity": "Uninjured", "Count": 8},
+            {"Year": 2016, "Severity": "Fatal", "Count": 2},
+            {"Year": 2016, "Severity": "Injured", "Count": 16},
+            {"Year": 2016, "Severity": "Uninjured", "Count": 13},
+            {"Year": 2017, "Severity": "Fatal", "Count": 1},
+            {"Year": 2017, "Severity": "Injured", "Count": 12},
+            {"Year": 2017, "Severity": "Uninjured", "Count": 8},
+            {"Year": 2018, "Severity": "Fatal", "Count": 1},
+            {"Year": 2018, "Severity": "Injured", "Count": 23},
+            {"Year": 2018, "Severity": "Uninjured", "Count": 6},
+            {"Year": 2019, "Severity": "Fatal", "Count": 0},
+            {"Year": 2019, "Severity": "Injured", "Count": 18},
+            {"Year": 2019, "Severity": "Uninjured", "Count": 6},
+            {"Year": 2020, "Severity": "Fatal", "Count": 8},
+            {"Year": 2020, "Severity": "Injured", "Count": 16},
+            {"Year": 2020, "Severity": "Uninjured", "Count": 13},
+            {"Year": 2021, "Severity": "Fatal", "Count": 3},
+            {"Year": 2021, "Severity": "Injured", "Count": 18},
+            {"Year": 2021, "Severity": "Uninjured", "Count": 3},
+            {"Year": 2022, "Severity": "Fatal", "Count": 1},
+            {"Year": 2022, "Severity": "Injured", "Count": 7},
+            {"Year": 2022, "Severity": "Uninjured", "Count": 1}
+        ]
+    },
+
+    "params": [
+        {
+            "name": "choose_year",
+            "value": 2010,
+            "bind": {
+                "input":"select",
+                "options": [2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022],
+                "labels": ["2010","2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022"],
+                "name": "Year: "
+            }
+        }
+    ],
+    
+
+    "mark": {
+        "type": "arc",
+        "innerRadius": 80
+    },
+
+    "encoding": {
+        "theta": {
+            "field": "Count",
+            "type": "quantitative"
+        },
+        "color": {
+            "field": "Severity",
+            "type": "nominal",
+            "scale": {
+                "domain": ["Fatal", "Injured", "Uninjured"],
+                "range": [
+                            "#e41a1c",
+                            "#386cb0",
+                            "#4daf4a"
+                        ]
+            },
+            "legend": {
+                        "titleFontSize": 25,
+                        "labelFontSize": 20,
+                        "labelAlign":"left"
+
+                    }  
+        },
+        "tooltip": [
+            {"field": "Severity", "type": "nominal", "title": "Severity"},
+            {"field": "Count", "type": "quantitative", "title": "Number of Incidents"}
+        ]
+
+    },
+    "transform": [
+        {
+            "filter": "datum.Year == choose_year"
+        }
+    ]
+                
+}
