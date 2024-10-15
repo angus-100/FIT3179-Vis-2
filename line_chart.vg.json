@@ -1,0 +1,53 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "height": 650,
+    "width": 650,
+    "title": {
+        "text":"Fatalities per Year",
+        "fontSize": 25
+    },
+    "background": "transparent",
+    "data": {
+        "url": "fatalities_vs_year.csv"
+    },
+
+
+    "mark": {
+        "type": "line",
+        "size": 3,
+        "color": "#e41a1c",
+        "tooltip": {
+            "content": "data"
+        },
+        "point": {
+            "shape": "circle",
+            "color": "#e41a1c",
+            "size": 100
+        }
+    },
+    
+    "encoding": {
+        "x": { 
+            "field": "year",
+            "type": "ordinal",
+            "title": "Year",
+            "axis": {"titleFontSize":20, "labelFontSize":15}
+            
+        },
+        "y": {
+            "field": "fatalities",
+            "type": "quantitative",
+            "title": "Fatalities",
+            "scale": {"domain": [0, 8]},  
+            "axis": {"titleFontSize": 20, "labelFontSize": 15, "tickCount": 8}
+
+        },
+
+        
+        "tooltip": [
+                    {"field": "year", "type": "ordinal", "title": "Year"},
+                    {"field": "fatalities", "type": "nominal", "title": "Number of Fatalities"}
+                ]
+                
+    }
+}

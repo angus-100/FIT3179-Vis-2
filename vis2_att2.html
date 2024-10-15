@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualisation 2 </title>
+
+    <script src="https://cdn.jsdelivr.net/npm/vega@5.30.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.21.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.26.0"></script>
+
+    <script src="vis2.js"></script>
+
+
+    <style>
+        * {
+            margin: 0;
+        }
+        body {
+            overflow-x: hidden;
+        }
+        
+        .header {
+            width: 100%;
+            height: 15vh;
+            margin: 0;
+            background-color: royalblue;
+            opacity: 80%;
+        }
+        .header h1{
+            text-align: center;
+            font-size: 60px;
+            font-family: sans-serif;
+            color: lightcyan;
+            padding-top: 2vh; 
+            padding-bottom: 0;
+        }
+        .header h2 {
+            text-align: center;
+            color: lightcyan;
+            font-family:sans-serif;
+            font-size: 25px;
+            padding-bottom: 0;
+        }
+        .header h3{
+            text-align: left;
+            color: lightcyan;
+            font-size: 18px;
+            padding-top: 0;
+            padding-left: 1vw;
+        }
+        .below_header {
+            display: flex;
+        }
+        .content {
+            display: block;
+            position: relative;
+            width: 60vw;
+            height: 100%;
+            border-right: 2px solid black;
+            background-color: lightcyan;
+            opacity: 80%;
+        }
+        .idiom {
+            position: relative;
+            margin-bottom: 30px;
+            margin-top: 20px;
+            margin-left: 8vw;
+        }
+        .right_third {
+            width: 40vw;
+            margin: 0;
+            padding: 0;
+
+        }
+        .intro_text {
+            display: inline-block;
+            position: relative;
+            height: 25vh;
+            right: 0;
+            padding-top: 10px;
+            padding-left: 30px;
+            padding-right: 30px;
+            padding-bottom: 0;
+            text-align: center;
+        }
+        .intro_text p{
+            font-size: 23px;
+            line-height: 1.2;
+        }
+        .intro_text img{
+            padding-top: 0;
+            width: 80%;
+            height: 30vh;
+            margin: 0;
+        }
+        .map_description {
+            padding-top: 0;
+        }
+        .map_total_p {
+            padding-top: 10px;
+        }
+        .map_total {
+            padding-top: 20px;
+            padding-left: 150px;   
+        }
+        .scatter_description {
+            display: inline-block;
+            position: relative;
+            height: 25vh;
+            right: 0;
+            padding-top: 10px;
+            padding-left: 30px;
+            padding-right: 30px;
+            padding-bottom: 0;
+            text-align: center;
+        }
+        .scatter_description p{
+            font-size: 23px;
+            line-height: 1.2;
+        }
+        .scatter_description img{
+            padding-top: 5%;
+            padding-bottom: 5%;
+            width: 80%;
+            height: 80%;
+        }
+        .pie_chart {
+            margin-left: 23%;
+        }
+        .bottom_description {
+            display: inline-block;
+            position: relative;
+            height: 25vh;
+            right: 0;
+            padding-top: 30px;
+            padding-left: 30px;
+            padding-right: 30px;
+            padding-bottom: 0;
+            text-align: center;
+        }
+        .bottom_description p{
+            font-size: 23px;
+            line-height: 1.2;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <h1>Shark Incidents in Australia</h1>
+        <h2>2010 - 2022</h2>
+        <h3>Data Source: https://zenodo.org/records/8231930</h3>
+    </div>
+    <div class="below_header">
+        <div class="content">
+            <div class="idiom" id="shark_map"></div>
+
+            <div class="idiom" id="bubble_chart"></div>
+
+            <div class="idiom" id="line_chart"></div>
+        </div>
+
+        <div class="right_third">
+            <div class="intro_text">
+                <p>
+                    Australia is a country known for it's wide variety of ecosystems. From vast desert to tropical rainforest, Australia has it all. 
+                    With this comes the many animal species which roam our land, some of which are dangerous and deterring to visitors.
+                    Perhaps the most deterring of these is the many sharks which patrol our waters. 
+                    This page shows the statistics and locations of all recorded shark-human encounters from 2010 to 2022.
+                </p>
+                <img src="gws2NB.png" alt="white shark" title="The Great White Shark is responsible for 78% (26/33) of the fatalities from 2010-2022">
+                <p class="map_description">
+                    The visualisation on the left is a map representing each of the shark-human incidents from 2010 to 2022. 
+                    The map can show patterns in shark behaviour from year to year due to different weather patterns or feeding patterns.
+                </p>
+                <p class="map_total_p">
+                    The map belows shows the same visualisation with all shark interactions from the same period of time. 
+                    Paired with the visualisation on the left, these visualisations can show which areas around the country are most prone to shark incidents.
+                </p>
+                
+            </div>
+            <div id="map_total" class="map_total">
+
+            </div>
+            <div class="scatter_description">
+                <p>
+                    The scatter plot on the left involes the shark-human incident data, plotting them on a chart based on latitude where the incident occured and month of the year that the incident occured.
+                    The greater the latitude, the further north the incident occured, and the warmer the water. 
+                </p>
+                <p>
+                    The NSW - Queensland coastal border is at approximately -28.164 degrees latitude. The Vic - Queensland coastal boarder is at approximately -37.5 degrees latitude.
+                    The plot shows how the majority of the incidents occured at the latitudes of NSW and Western Australia, where the water is moderate, and home to many sharks.
+                    The Month axis aims to explore if sharks are more likely to attack at different times of the year.
+                </p>
+                <img src="bullsharkNB2.png" alt="bull_shark" title="The Bull shark is often labelled the one of the most aggresive shark species, however is only responsible for 21 out of the 301 known incidents from 2010 to 2022, with only one fatality">
+            </div>
+            <div id="pie_chart" class="pie_chart"></div>
+            <div class="bottom_description">
+                <p>
+                    The Above donut chart shows the yearly distribution of shark incidents by severity. 
+                    This visaulisation shows the the rarity of fatal shark attacks, when compared to all shark incidents. 
+                    The tooltips on each shark image also display the statistics involving that particular shark breed.
+                </p>
+                <p>
+                    The left line chart presents the yearly fatalilities caused by sharks. This data indicates that there is not an obvious trend describing shark behaviour.
+                    The maximum value for the chart is 8 fatalities which occured in 2022.
+                </p>
+                <p>
+                    
+                </p>
+                <p>
+                    In conclusion, this visualisation aims to give any travellers coming to Australia an insight into the true nature of sharks, and the areas they inhabit.
+                </p>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
